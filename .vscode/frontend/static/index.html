@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="auth-section">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="text" id="login-username" placeholder="Username or Email" required><br>
+            <input type="password" id="login-password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+        <h2>Register</h2>
+        <form id="register-form">
+            <input type="text" id="register-username" placeholder="Username" required><br>
+            <input type="email" id="register-email" placeholder="Email" required><br>
+            <input type="password" id="register-password" placeholder="Password" required><br>
+            <button type="submit">Register</button>
+        </form>
+        <div id="auth-message"></div>
+    </div>
+    <div id="dashboard-section" style="display:none;">
+        <button id="logout-btn">Logout</button>
+        <h2>Add Expense</h2>
+        <form id="expense-form">
+            <input type="text" id="expense-category" placeholder="Category" required>
+            <input type="number" id="expense-amount" placeholder="Amount" required>
+            <input type="date" id="expense-date" required>
+            <select id="expense-type">
+                <option value="EXPENSE">Expense</option>
+                <option value="INCOME">Income</option>
+            </select>
+            <input type="text" id="expense-description" placeholder="Description">
+            <button type="submit">Add Expense</button>
+        </form>
+        <h2>Expenses</h2>
+        <table id="expenses-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="dashboard-message"></div>
+        <!-- Places to Visit Section -->
+        <h2>Places to Visit</h2>
+        <form id="place-form">
+            <input type="text" id="place-name" placeholder="Place Name" required>
+            <input type="text" id="place-description" placeholder="Description">
+            <input type="number" id="place-estimated-cost" placeholder="Estimated Cost" required>
+            <button type="submit">Add Place</button>
+        </form>
+        <table id="places-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Estimated Cost</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="places-message"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Manage Your Finances</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="main-container">
+        <div id="auth-container">
+            <h2>Welcome to Expense Tracker</h2>
+            <form id="login-form">
+                <div class="animal-face-container">
+                    <svg id="gorilla-face-login" class="animal-face" width="80" height="70" viewBox="0 0 80 70">
+                        <ellipse cx="40" cy="40" rx="28" ry="22" fill="#444" stroke="#222" stroke-width="2"/>
+                        <ellipse cx="25" cy="22" rx="10" ry="13" fill="#222"/>
+                        <ellipse cx="55" cy="22" rx="10" ry="13" fill="#222"/>
+                        <ellipse cx="40" cy="60" rx="16" ry="8" fill="#222"/>
+                        <ellipse class="gorilla-eye gorilla-eye-left" cx="32" cy="40" rx="4" ry="4" fill="#fff"/>
+                        <ellipse class="gorilla-eye gorilla-eye-right" cx="48" cy="40" rx="4" ry="4" fill="#fff"/>
+                        <ellipse class="gorilla-pupil gorilla-pupil-left" cx="32" cy="40" rx="1.5" ry="1.5" fill="#222"/>
+                        <ellipse class="gorilla-pupil gorilla-pupil-right" cx="48" cy="40" rx="1.5" ry="1.5" fill="#222"/>
+                        <rect class="gorilla-eye-lid gorilla-eye-lid-left" x="28" y="36" width="8" height="5" fill="#444" stroke="#222" stroke-width="0.5" rx="2"/>
+                        <rect class="gorilla-eye-lid gorilla-eye-lid-right" x="44" y="36" width="8" height="5" fill="#444" stroke="#222" stroke-width="0.5" rx="2"/>
+                        <ellipse cx="40" cy="52" rx="4" ry="2" fill="#fff"/>
+                    </svg>
+                </div>
+                <input type="text" id="login-username" placeholder="Username or Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit">Sign In</button>
+            </form>
+            <h2>Create New Account</h2>
+            <form id="register-form">
+                <div class="animal-face-container">
+                    <svg id="gorilla-face-register" class="animal-face" width="80" height="70" viewBox="0 0 80 70">
+                        <ellipse cx="40" cy="40" rx="28" ry="22" fill="#444" stroke="#222" stroke-width="2"/>
+                        <ellipse cx="25" cy="22" rx="10" ry="13" fill="#222"/>
+                        <ellipse cx="55" cy="22" rx="10" ry="13" fill="#222"/>
+                        <ellipse cx="40" cy="60" rx="16" ry="8" fill="#222"/>
+                        <ellipse class="gorilla-eye gorilla-eye-left" cx="32" cy="40" rx="4" ry="4" fill="#fff"/>
+                        <ellipse class="gorilla-eye gorilla-eye-right" cx="48" cy="40" rx="4" ry="4" fill="#fff"/>
+                        <ellipse class="gorilla-pupil gorilla-pupil-left" cx="32" cy="40" rx="1.5" ry="1.5" fill="#222"/>
+                        <ellipse class="gorilla-pupil gorilla-pupil-right" cx="48" cy="40" rx="1.5" ry="1.5" fill="#222"/>
+                        <rect class="gorilla-eye-lid gorilla-eye-lid-left" x="28" y="36" width="8" height="5" fill="#444" stroke="#222" stroke-width="0.5" rx="2"/>
+                        <rect class="gorilla-eye-lid gorilla-eye-lid-right" x="44" y="36" width="8" height="5" fill="#444" stroke="#222" stroke-width="0.5" rx="2"/>
+                        <ellipse cx="40" cy="52" rx="4" ry="2" fill="#fff"/>
+                    </svg>
+                </div>
+                <input type="text" id="register-username" placeholder="Username" required>
+                <input type="email" id="register-email" placeholder="Email Address" required>
+                <input type="password" id="register-password" placeholder="Password" required>
+                <button type="submit">Create Account</button>
+            </form>
+            <div id="auth-error" class="error"></div>
+        </div>
+        
+        <div id="dashboard-container" style="display:none;">
+            <button id="logout-btn">Logout</button>
+            
+            <!-- Expense Summary Section -->
+            <div class="dashboard-section">
+                <h2>Financial Summary</h2>
+                <div id="summary-cards">
+                    <div class="summary-card income">
+                        <h3>Total Income</h3>
+                        <p id="total-income">₹0.00</p>
+                    </div>
+                    <div class="summary-card expense">
+                        <h3>Total Expenses</h3>
+                        <p id="total-expenses">₹0.00</p>
+                    </div>
+                    <div class="summary-card balance">
+                        <h3>Net Balance</h3>
+                        <p id="net-balance">₹0.00</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-section">
+                <h2>Credit Card Summary</h2>
+                <div id="credit-card-summary" class="summary-card credit-card">
+                    <div>Limit: <span id="cc-limit">₹0.00</span></div>
+                    <div>Spent: <span id="cc-spent">₹0.00</span></div>
+                    <div>Left: <span id="cc-left">₹0.00</span></div>
+                </div>
+                <form id="cc-limit-form" style="margin-top:10px;">
+                    <input type="number" id="cc-limit-input" placeholder="Set Credit Card Limit" step="0.01" min="0" required>
+                    <button type="submit">Update Limit</button>
+                </form>
+                <div id="cc-limit-message"></div>
+            </div>
+            
+            <div class="dashboard-section">
+                <h2>Add New Transaction</h2>
+                <form id="expense-form">
+                    <input type="text" id="expense-category" placeholder="Category" required>
+                    <input type="number" id="expense-amount" placeholder="Amount" step="0.01" required>
+                    <input type="date" id="expense-date" required>
+                    <select id="expense-type">
+                        <option value="EXPENSE">Expense</option>
+                        <option value="INCOME">Income</option>
+                    </select>
+                    <input type="text" id="expense-description" placeholder="Description (Optional)">
+                    <label style="display:block;margin:8px 0;">
+                        <input type="checkbox" id="expense-credit-card"> Paid by credit card
+                    </label>
+                    <button type="submit">Add Transaction</button>
+                </form>
+                <div id="expense-error" class="error"></div>
+            </div>
+            
+            <!-- Search and Filter Section -->
+            <div class="dashboard-section">
+                <h2>Search & Filter</h2>
+                <div id="filter-form">
+                    <input type="date" id="filter-start-date" placeholder="Start Date">
+                    <input type="date" id="filter-end-date" placeholder="End Date">
+                    <select id="filter-category">
+                        <option value="">All Categories</option>
+                    </select>
+                    <select id="filter-type">
+                        <option value="">All Types</option>
+                        <option value="EXPENSE">Expenses Only</option>
+                        <option value="INCOME">Income Only</option>
+                    </select>
+                    <input type="text" id="filter-description" placeholder="Search in description">
+                    <button type="button" id="apply-filter">Apply Filter</button>
+                    <button type="button" id="clear-filter">Clear Filter</button>
+                </div>
+            </div>
+            
+            <div class="dashboard-section">
+                <h2>Your Transactions</h2>
+                <div class="table-actions">
+                    <button type="button" id="export-csv">Export to CSV</button>
+                    <span id="transaction-count">0 transactions</span>
+                </div>
+                <table id="expenses-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Transactions will be loaded here -->
+                    </tbody>
+                </table>
+                <div id="no-transactions" class="empty-state" style="display:none;">
+                    <h3>No transactions found</h3>
+                    <p>Add your first transaction to get started!</p>
+                </div>
+            </div>
+            <!-- Places to Visit Section -->
+            <div class="dashboard-section">
+                <h2>Places to Visit</h2>
+                <form id="place-form">
+                    <input type="text" id="place-name" placeholder="Place Name" required>
+                    <input type="text" id="place-description" placeholder="Description">
+                    <input type="number" id="place-estimated-cost" placeholder="Estimated Cost" required>
+                    <button type="submit">Add Place</button>
+                </form>
+                <table id="places-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Estimated Cost</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="places-total"></div>
+                <div id="places-message"></div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 
